@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    {% load static %}
+  </head>
+  <body>
+    <form method="POST" action="/update/{{ user.id }}/">
+      {% csrf_token %}
+        <center>
+        <h3>Update Details</h3>
+        <label >Name:</label><input name="name" value="{{ user.name }}" /><br>
+        <label >City:</label><input name="city" value="{{ user.city }}" /><br>
+        <label >Phone:</label><input name="phone" value="{{ user.phone }}" /><br>
+        <button type="submit">Update</button>
+        </center>
+    </form>
+  </body>
+</html>

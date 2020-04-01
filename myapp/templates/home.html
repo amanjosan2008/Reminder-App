@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>{{ title }}</title>
+    </head>
+    <body>
+     <center>
+      <h1>Reminder App</h1>
+      <p> <a href="{% url 'add' %}">Add User</a> </p>
+      <br> <br>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+        {% if user_list %}
+           {{ user_list|length }} records found:<br><br>
+           {% for item in user_list %}
+            <tr>
+             <td>{{ item.id }}</td>
+             <td>{{ item.name }}</td>
+             <td>{{ item.city }}</td>
+             <td>{{ item.phone }}</td>
+             <td>
+               <a href="/edit/{{ item.id }}/">Edit</a>
+               <a href="/delete/{{ item.id }}/">Delete</a>
+               <form action="/submit/{{ item.id }}/" method="POST">
+                 {% csrf_token %}
+                   <button type="submit" name="sendsms"> SMS </button>
+               </form>
+             </td>
+            </tr>
+           {% empty %}
+             <td>Sorry, no User added yet</td>
+           {% endfor %}
+        {% else %}
+           There are no records in the system
+        {% endif %}
+      </table>
+    </center>
+    </body>
+</html>
