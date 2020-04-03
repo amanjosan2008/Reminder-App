@@ -1,45 +1,60 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <title>{{ title }}</title>
+       <title>Home Page</title>
+       {% extends "base.html" %}
+       {% block content %}
+       <style>
+          table {
+            border-collapse: collapse;
+            width: 90%;
+          }
+          th, td {
+            text-align: left;
+            padding: 8px;
+          }
+          tr:nth-child(even) {background-color: #f2f2f2;}
+       </style>
     </head>
     <body>
-     <center>
-      <h1>Reminder App</h1>
-      <p> <a href="{% url 'add' %}">Add User</a> </p>
+      <center>
+      <p>
+          <a href="{% url 'add' %}">Add User</a> &nbsp;
+          <a href="{% url 'message' %}">Edit Message</a>
+      </p>
       <br> <br>
+
       <table>
+        <center>
         <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>City</th>
-          <th>Phone</th>
-          <th>Actions</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Actions</th>
         </tr>
         {% if user_list %}
            {{ user_list|length }} records found:<br><br>
            {% for item in user_list %}
             <tr>
-             <td>{{ item.id }}</td>
-             <td>{{ item.name }}</td>
-             <td>{{ item.city }}</td>
-             <td>{{ item.phone }}</td>
-             <td>
-               <a href="/edit/{{ item.id }}/">Edit</a>
-               <a href="/delete/{{ item.id }}/">Delete</a>
-               <form action="/submit/{{ item.id }}/" method="POST">
-                 {% csrf_token %}
-                   <button type="submit" name="sendsms"> SMS </button>
-               </form>
-             </td>
+               <td>{{ item.id }}</td>
+               <td>{{ item.name }}</td>
+               <td>{{ item.city }}</td>
+               <td>{{ item.phone }}</td>
+               <td>
+                   <a href="/edit/{{ item.id }}/">Edit</a>
+                   <a href="/delete/{{ item.id }}/">Delete</a>
+                   <a href="/sendsms/{{ item.id }}/">SMS</a>
+               </td>
             </tr>
            {% empty %}
-             <td>Sorry, no User added yet</td>
+             No user added
            {% endfor %}
         {% else %}
            There are no records in the system
         {% endif %}
       </table>
-    </center>
+     </center>
     </body>
+    {% endblock %}
 </html>

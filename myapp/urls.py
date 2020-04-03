@@ -18,14 +18,16 @@ from django.urls import path
 from django.conf.urls import include, url
 admin.autodiscover()
 
-from myapp.views import home,add,destroy,edit,update,submit
+from myapp.views import home,add,destroy,edit,edit_save,sendsms,message,message_save
 
 urlpatterns=[
     url(r'^admin/', admin.site.urls),
     url(r'^home/', home, name = 'home'),
     url(r'^add/', add, name = 'add'),
+    url(r'^message/', message, name = 'message'),
+    url(r'^message_save/', message_save, name = 'message_save'),
     url(r'^delete/(?P<id>[\d]+)/$', destroy, name='destroy'),
     url(r'^edit/(?P<id>[\d]+)/$', edit, name = 'edit'),
-    url(r'^update/(?P<id>[\d]+)/$', update, name = 'update'),
-    url(r'^submit/(?P<id>[\d]+)/$', submit, name = 'submit'),
+    url(r'^edit_save/(?P<id>[\d]+)/$', edit_save, name = 'edit_save'),
+    url(r'^sendsms/(?P<id>[\d]+)/$', sendsms, name = 'sendsms'),
 ]

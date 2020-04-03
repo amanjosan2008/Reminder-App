@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Message</title>
+        {% extends "base.html" %}
+        {% block content %}
+    </head>
+    <body>
+       <form method="POST" action="/message_save/">
+         {% csrf_token %}
+           <center>
+               <h3>Edit the SMS Message</h3>
+               <label >SMS Template:</label>
+               <input name="message_text" value="{{ message_format.message_text }}" maxlength="160" size="120" /><br>
+               <button type="submit">Update</button>
+           </center>
+       </form>
+       <h3>Previous Templates</h3>
+         {% if message_list %}
+            {{ message_list|length }} records found:<br><br>
+            {% for item in message_list %}
+             <tr>
+                <td>{{item.id}}. {{ item }}</td><br>
+             </tr>
+            {% empty %}
+              No template saved
+            {% endfor %}
+         {% else %}
+            There are no records in the system
+         {% endif %}
+    </body>
+    {% endblock %}
+</html>
