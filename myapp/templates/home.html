@@ -31,6 +31,10 @@
             <th>Name</th>
             <th>City</th>
             <th>Phone</th>
+            <th>Added</th>
+            <th>Last SMS</th>
+            <th>Success</th>
+            <th>Error</th>
             <th>Actions</th>
         </tr>
         {% if user_list %}
@@ -41,6 +45,10 @@
                <td>{{ item.name }}</td>
                <td>{{ item.city }}</td>
                <td>{{ item.phone }}</td>
+               <td>{{ item.added_time }}</td>
+               <td>{{ item.last_sms }}</td>
+               <td>{{ item.success }}</td>
+               <td>{{ item.error }}</td>
                <td>
                    <a href="/edit/{{ item.id }}/">Edit</a>
                    <a href="/delete/{{ item.id }}/">Delete</a>
